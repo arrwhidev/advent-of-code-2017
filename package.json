@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Advent of Code 2017",
   "scripts": {
-    "test": "mocha --recursive */**/*.spec.js"
+    "test": "mocha --recursive */**/*.spec.js --watch"
   },
   "author": "Arran White",
   "license": "ISC",
