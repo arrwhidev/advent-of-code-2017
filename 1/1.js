@@ -16,16 +16,11 @@
  */
 
  function sumValuesWithCirculaDelta(input, delta) {
-     const str = input.toString()
-     let result = 0
-     for (let i = 0; i < str.length; i++) {
-         const currNum = str[i]
-         const nextNum = str[(i + delta) % str.length]
-         if (currNum === nextNum) {
-             result += parseInt(currNum)
-         }
-     }
-     return result;
+    const str = input.toString();
+    return str.split('').reduce((result, currNum, i) => {
+        const nextNum = str[(i + delta) % str.length]
+        return (currNum === nextNum) ? result + parseInt(currNum) : result
+    }, 0)
  }
 
 function captcha1(input) {
