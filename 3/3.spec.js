@@ -16,6 +16,7 @@ describe('Day 3', () => {
             expect(calculateGridPosition(7)).to.deep.equal({ x: -1, y: -1 })
             expect(calculateGridPosition(8)).to.deep.equal({ x: 0, y: -1 })
             expect(calculateGridPosition(9)).to.deep.equal({ x: 1, y: -1 })
+            expect(calculateGridPosition(13)).to.deep.equal({ x: 2, y: 2 })
             expect(calculateGridPosition(25)).to.deep.equal({ x: 2, y: -2 })
             expect(calculateGridPosition(37)).to.deep.equal({ x: -3, y: 3 })
         })
