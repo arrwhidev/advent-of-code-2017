@@ -16,14 +16,56 @@ function calculateGridPosition(number) {
         delta *= -1 // flip direction mode (right+up or left+down)
         movesRequired += 2
     }
-
-    return pos
 }
 
 function manhattenDistance(number) {
-    const origin = { x: 0, y: 0 };
-    const pos = calculateGridPosition(number);
-    return (Math.abs(pos.x) - Math.abs(origin.x)) + (Math.abs(pos.y) - Math.abs(origin.y))
+    const { x, y } = calculateGridPosition(number);
+    return Math.abs(x) + Math.abs(y);
 }
 
-module.exports = { manhattenDistance, calculateGridPosition }
+function spiralSum(number) {
+    const grid = createEmptyGrid(130)
+    let pos = { x: 100, y: 100 }
+    let i = 1, delta = 1, movesRequired = 2
+    while (true) {
+        for (let movesRemaining = movesRequired; movesRemaining > 0; movesRemaining--) {
+            const { x, y } = pos;
+            grid[x][y] = (i === 1) ? 1 : totalNear(grid, x, y)
+
+            if (movesRemaining > (movesRequired / 2)) {
+                pos.x += delta
+            } else {
+                pos.y += delta
+            }
+
+            if (i === number) return grid[x][y]
+            i++
+        }
+
+        delta *= -1 // flip direction mode (right+up or left+down)
+        movesRequired += 2
+    }
+}
+
+function createEmptyGrid(gridSize) {
+    let grid = [];
+    for (let i = 0; i < gridSize; i++) {
+        grid[i] = Array(gridSize)
+    }
+    return grid;
+}
+
+function totalNear(grid, x, y) {
+    let total = 0;
+    total += grid[x+1][y] || 0
+    total += grid[x+1][y+1] || 0
+    total += grid[x][y+1] || 0
+    total += grid[x-1][y+1] || 0
+    total += grid[x-1][y] || 0
+    total += grid[x-1][y-1] || 0
+    total += grid[x][y-1] || 0
+    total += grid[x+1][y-1] || 0
+    return total
+}
+
+module.exports = { manhattenDistance, calculateGridPosition, spiralSum }

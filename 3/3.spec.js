@@ -1,7 +1,8 @@
 const { expect } = require('chai')
 const {
     calculateGridPosition,
-    manhattenDistance
+    manhattenDistance,
+    spiralSum
 } = require('./3')
 
 describe('Day 3', () => {
@@ -31,6 +32,34 @@ describe('Day 3', () => {
             ].forEach(test => {
                 expect(manhattenDistance(test.input)).to.equal(test.expected)
             });
+        })
+    })
+
+    describe('Spiral Memory Challenge 2', () => {
+        it('should incrementally sum all neighbours', () => {
+            [
+                { input: 1, expected: 1 },
+                { input: 2, expected: 1 },
+                { input: 3, expected: 2 },
+                { input: 4, expected: 4 },
+                { input: 5, expected: 5 },
+                { input: 6, expected: 10 },
+                { input: 7, expected: 11 },
+                { input: 8, expected: 23 },
+                { input: 9, expected: 25 },
+                { input: 10, expected: 26 },
+                { input: 11, expected: 54 }
+            ].forEach(test => {
+                expect(spiralSum(test.input)).to.equal(test.expected)
+            });
+        })
+
+        it('should find the largest value above 312051', () => {
+            let i = 1
+            while (spiralSum(i) < 312051) {
+                i++
+            }
+            console.log('answer is:', spiralSum(i));
         })
     })
 })
