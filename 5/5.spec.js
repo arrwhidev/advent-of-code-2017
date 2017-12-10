@@ -6,7 +6,7 @@ const {
 } = require('./5')
 
 describe('Day 5', () => {
-    describe('Maze challenge 1', () => {
+    xdescribe('Maze challenge 1', () => {
         it('should return number of steps to escape the maze', () => {
             expect(maze('0 3 0 1 -3')).to.equal(5)
         })
@@ -23,7 +23,7 @@ describe('Day 5', () => {
         })
     })
 
-    describe('Maze challenge 2', () => {
+    xdescribe('Maze challenge 2', () => {
         it('should return number of steps to escape the maze', () => {
             expect(maze2('0 3 0 1 -3')).to.equal(10)
         })
