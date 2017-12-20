@@ -2,7 +2,8 @@ const { expect } = require('chai')
 const fs = require('fs')
 const {
     convertRow,
-    findRoot
+    findRoot,
+    convertToTree
 } = require('./7')
 
 describe('Day 7', () => {
@@ -45,6 +46,48 @@ describe('Day 7', () => {
                     .split('\n')
                     .filter(line => line !== '')
                 expect(findRoot(rows)).to.equal('qibuqqg')
+            })
+        })
+    })
+
+    describe('Challenge 2', () => {
+        it('should convert to tree correctly', () => {
+            expect(
+                convertToTree([
+                    'three (3)',
+                    'one (1) -> two, three',
+                    'two (2) -> four, five',
+                    'five (5)',
+                    'four (4)',
+                ])
+            ).to.deep.equal({
+                one: {
+                    name: 'one',
+                    weight: 1,
+                    items: {
+                        two: {
+                            name: 'two',
+                            weight: 2,
+                            items: {
+                                four: {
+                                    name: 'four',
+                                    weight: 4,
+                                    items: {}
+                                },
+                                five: {
+                                    name: 'five',
+                                    weight: 5,
+                                    items: {}
+                                }
+                            }
+                        },
+                        three: {
+                            name: 'three',
+                            weight: 3,
+                            items: {}
+                        }
+                    }
+                }
             })
         })
     })

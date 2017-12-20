@@ -13,6 +13,29 @@ function convertRow(row) {
     return item
 }
 
+function convertToTree(lines) {
+    const allNodes = lines.map(row => convertRow(row))
+    const root = findRoot(lines)
+    const rootNode = allNodes.find(n => n.name === root)
+    const tree = {}
+    recAdd(tree, rootNode, allNodes)
+    return tree
+}
+
+function recAdd(tree, node, allNodes) {
+    if (!node) return
+    tree[node.name] = node
+    tree[node.name].children = {}
+
+    node.items.forEach(childName => {
+        const childNode = allNodes.find(n => n.name === childName)
+        recAdd(tree[node.name].children, childNode, allNodes)
+    })
+
+    tree[node.name].items = tree[node.name].children;
+    delete tree[node.name].children
+}
+
 function findRoot(lines) {
     const rows = lines
         .map(row => convertRow(row))
@@ -31,4 +54,4 @@ function findRoot(lines) {
     }, null);
 }
 
-module.exports = { convertRow, findRoot }
+module.exports = { convertRow, findRoot, convertToTree }
