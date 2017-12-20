@@ -5,8 +5,9 @@ function runInstructions(lines) {
             if (!register[inst.reg]) register[inst.reg] = 0
             if (!register[inst.condition.reg]) register[inst.condition.reg] = 0
             if (inst.execCondition(register)) inst.execInstruction(register)
+            if (register[inst.reg] > register._max) register._max = register[inst.reg]
             return register
-        }, {})
+        }, { _max: 0 })
 }
 
 function convertLineToInstruction(line) {

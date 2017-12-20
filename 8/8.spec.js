@@ -17,7 +17,8 @@ describe('Day 8', () => {
             ).to.deep.equal({
                 a: 1,
                 b: 0,
-                c: -10
+                c: -10,
+                _max: 10
             })
         })
 
@@ -31,6 +32,18 @@ describe('Day 8', () => {
                     ...Object.keys(register).map(key => register[key])
                 );
                 console.log('Max in register', max);
+            })
+        })
+    })
+
+    describe('Challenge 2', () => {
+        it('should find the largest value in the register at any point', () => {
+            fs.readFile('./8/input.txt', 'utf8', (err, contents) => {
+                const lines = contents
+                    .split('\n')
+                    .filter(line => line !== '')
+                const register = runInstructions(lines)
+                console.log('Max in register any time', register._max);
             })
         })
     })
