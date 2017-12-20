@@ -3,7 +3,8 @@ const fs = require('fs')
 const {
     convertRow,
     findRoot,
-    convertToTree
+    convertToTree,
+    findUnbalance
 } = require('./7')
 
 describe('Day 7', () => {
@@ -88,6 +89,17 @@ describe('Day 7', () => {
                         }
                     }
                 }
+            })
+        })
+
+        it('should find unbalance', () => {
+            fs.readFile('./7/input.txt', 'utf8', (err, contents) => {
+                const rows = contents
+                    .split('\n')
+                    .filter(line => line !== '')
+                findUnbalance(
+                    convertToTree(rows)['qibuqqg']
+                )
             })
         })
     })

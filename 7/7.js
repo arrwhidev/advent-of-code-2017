@@ -36,6 +36,22 @@ function recAdd(tree, node, allNodes) {
     delete tree[node.name].children
 }
 
+function findUnbalance(node) {
+    const itemKeys = Object.keys(node.items)
+    if (itemKeys.length === 0) return node.weight
+    let totals = []
+    itemKeys.forEach((itemKey, i) => {
+        const w = findUnbalance(node.items[itemKey])
+        if (i > 0 && w !== totals[i-1]) {
+            const diff = w - totals[i-1]
+            console.log(`Expected ${totals[i-1]} but got ${w}. Diff = ${diff}. Weight of ${itemKey} should be ${node.items[itemKey].weight - diff}`);
+        }
+        totals.push(w)
+    });
+
+    return node.weight + totals.reduce((a, b) => a + b, 0);
+}
+
 function findRoot(lines) {
     const rows = lines
         .map(row => convertRow(row))
@@ -54,4 +70,4 @@ function findRoot(lines) {
     }, null);
 }
 
-module.exports = { convertRow, findRoot, convertToTree }
+module.exports = { convertRow, findRoot, convertToTree, findUnbalance }
