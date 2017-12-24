@@ -5,7 +5,7 @@ const {
 } = require('./11')
 
 describe('Day 11', () => {
-    describe('Challenge 1', () => {
+    describe('Challenge 1 & 2', () => {
         it('should return the distance', () => {
             expect(parseMovements('ne,ne,ne')).to.equal(3)
             expect(parseMovements('ne,ne,sw,sw')).to.equal(0)

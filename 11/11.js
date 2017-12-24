@@ -1,4 +1,5 @@
 function parseMovements(input) {
+    let max = 0
     const cubePosition = input
         .split('\n')[0]
         .split(',')
@@ -23,9 +24,13 @@ function parseMovements(input) {
                 pos.z++
             }
 
+            const dist = manhattenDistaneCube(pos);
+            max = (dist > max) ? dist : max;
+
             return pos
         }, { x: 0, y: 0, z: 0 })
 
+    console.log('Max distance was:', max);
     return manhattenDistaneCube(cubePosition);
 }
 
