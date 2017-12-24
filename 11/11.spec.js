@@ -13,9 +13,12 @@ describe('Day 11', () => {
             expect(parseMovements('se,sw,se,sw,sw')).to.equal(3)
         })
 
-        it('should parse input', () => {
+        it('should parse input', (done) => {
             fs.readFile('./11/input.txt', 'utf8', (err, contents) => {
-                console.log('Day 11 part 1 distance:', parseMovements(contents))
+                expect(
+                    parseMovements(contents)
+                ).to.equal(715)
+                done()
             })
         })
     })

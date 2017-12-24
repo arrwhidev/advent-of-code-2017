@@ -21,11 +21,11 @@ describe('Day 12', () => {
             expect(isConnectedTo(map, 1, 0)).to.equal(false)
         })
 
-        it('should parse input', () => {
+        it('should parse input', (done) => {
             fs.readFile('./12/input.txt', 'utf8', (err, contents) => {
-                console.log('Day 12 number of pipes to 0:', numConnections(contents))
+                expect(numConnections(contents)).to.equal(288)
+                done()
             })
-            expect(1).to.equal(2)
         })
     })
 })

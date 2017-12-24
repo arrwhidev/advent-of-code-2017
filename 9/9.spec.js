@@ -54,10 +54,11 @@ describe('Day 9', () => {
         expect(calculateScore('{{<a!>},{<a!>},{<a!>},{<ab>}}')).to.equal(3)
     })
 
-    it('should calculate score from real input', () => {
+    it('should calculate score from real input', (done) => {
         fs.readFile('./9/input.txt', 'utf8', (err, contents) => {
             const score = calculateScore(contents)
             console.log('Stream score:', score, 'Expected: 21037');
+            done()
         })
     })
 
@@ -69,10 +70,11 @@ describe('Day 9', () => {
             expect(convertToGroups('<{o"i!a,<{i<a>').garbage).to.equal(10)
         })
 
-        it('should count garbage in real input', () => {
+        it('should count garbage in real input', (done) => {
             fs.readFile('./9/input.txt', 'utf8', (err, contents) => {
                 const { garbage } = convertToGroups(contents)
                 console.log('Garbage count:', garbage, 'Expected: 9495');
+                done()
             })
         })
     })

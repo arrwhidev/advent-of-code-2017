@@ -8,18 +8,20 @@ function parsePipes(input) {
     })
 }
 
-function isConnectedTo(map, from, to, prev) {
-    // console.log('from', from, 'to', to, 'prev', prev, map[from]);
+function isConnectedTo(map, from, to, prev, set = new Set()) {
+    set.add(from)
+    
     if (from == to) return true
-    if (map[from].length === 1 && map[from][0] == from) return false
     if (map[from].includes(to)) return true
+    if (map[from].length === 1 && map[from][0] == from) return false
     let isConnected = false
     map[from]
         .filter(i => i != from)
         .filter(i => i != prev)
+        .filter(i => !set.has(i))
         .forEach(i => {
             if (!isConnected) {
-                isConnected = isConnectedTo(map, i, to, from)
+                isConnected = isConnectedTo(map, i, to, from, set)
             }
         })
     return isConnected
@@ -28,9 +30,7 @@ function isConnectedTo(map, from, to, prev) {
 function numConnections(input) {
     const map = parsePipes(input)
     return Object.keys(map).reduce((connections, key) => {
-        const yn = isConnectedTo(map, key, 0)
-        // console.log('key:', key, '=', yn);
-        return yn ? connections + 1 : connections;
+        return (isConnectedTo(map, key, 0)) ? connections + 1 : connections;
     }, 0)
 }
 

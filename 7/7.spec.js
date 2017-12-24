@@ -41,12 +41,13 @@ describe('Day 7', () => {
             ).to.equal('one')
         })
 
-        it('should find the root node for the real input', () => {
+        it('should find the root node for the real input', (done) => {
             fs.readFile('./7/input.txt', 'utf8', (err, contents) => {
                 const rows = contents
                     .split('\n')
                     .filter(line => line !== '')
                 expect(findRoot(rows)).to.equal('qibuqqg')
+                done()
             })
         })
     })
@@ -92,7 +93,7 @@ describe('Day 7', () => {
             })
         })
 
-        it('should find unbalance', () => {
+        it('should find unbalance', (done) => {
             fs.readFile('./7/input.txt', 'utf8', (err, contents) => {
                 const rows = contents
                     .split('\n')
@@ -100,6 +101,7 @@ describe('Day 7', () => {
                 findUnbalance(
                     convertToTree(rows)['qibuqqg']
                 )
+                done()
             })
         })
     })
