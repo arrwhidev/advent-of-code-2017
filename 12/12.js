@@ -25,4 +25,24 @@ function numConnections(input) {
     }, 0)
 }
 
-module.exports = { numConnections, isConnectedTo }
+function reduceToGroup(map, num, set) {
+    if (!set.has(num)) {
+        set.add(num)
+        map[num].forEach(i => {
+            reduceToGroup(map, i, set)
+        })
+    }
+}
+
+function numGroups(input) {
+    const map = parsePipes(input)
+    const set = new Set()
+    return Object.keys(map).reduce((groups, key) => {
+        const k = parseInt(key)
+        if (!set.has(k)) groups++
+        reduceToGroup(map, k, set)
+        return groups
+    }, 0)
+}
+
+module.exports = { numConnections, isConnectedTo, numGroups }
