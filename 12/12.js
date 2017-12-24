@@ -8,23 +8,14 @@ function parsePipes(input) {
     })
 }
 
-function isConnectedTo(map, from, to, prev, set = new Set()) {
+function isConnectedTo(map, from, to, set = new Set()) {
     set.add(from)
-    
     if (from == to) return true
-    if (map[from].includes(to)) return true
-    if (map[from].length === 1 && map[from][0] == from) return false
-    let isConnected = false
-    map[from]
-        .filter(i => i != from)
-        .filter(i => i != prev)
+    return map[from]
         .filter(i => !set.has(i))
-        .forEach(i => {
-            if (!isConnected) {
-                isConnected = isConnectedTo(map, i, to, from, set)
-            }
-        })
-    return isConnected
+        .reduce((isConnected, i) => {
+            return (!isConnected) ? isConnectedTo(map, i, to, set) : true
+        }, false)
 }
 
 function numConnections(input) {
