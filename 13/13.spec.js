@@ -7,7 +7,7 @@ const {
 } = require('./13')
 
 describe('Day 13', () => {
-    describe('Challenge 1 ', () => {
+    xdescribe('Challenge 1 ', () => {
         it('should return severity', () => {
             const layers = [
                 { depth: 0, range: 3, offset: 4 },
@@ -28,7 +28,7 @@ describe('Day 13', () => {
         })
     })
 
-    describe('Challenge 2 ', () => {
+    xdescribe('Challenge 2 ', () => {
         it('should find fastest path through the firewall without getting caught', () => {
             const layers = [
                 { depth: 0, range: 3, offset: 4 },
